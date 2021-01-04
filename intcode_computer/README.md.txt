@@ -51,18 +51,22 @@ The hundreds place corresponds to the parameter mode of the first argument, the 
 
 
 
-### Test Programs/Usages
+### Usage
 
-To write an intcode program, enter as comma listed. Then run the intcode_to_hex.py script with argument intcode program file and argument output hex RAM file (raw files). Finally, load image to instruction RAM. Set input mode as 1 (numbers) or 0 (characters) with the labeled constant. Run simulation with Enable and set Hz. 
+1. Write intcode program, numbers comma separated (view dec_program for example)
+2. Run the intcode_to_hex.py script.
+	python intcode_to_hex.py <intcode program file> <output hex file>
+3. Finally, load image to instruction RAM in main_computer. Set input mode as 1 (numbers) or 0 (characters) with the labeled constant. 
+4. Run simulation with Enable and set rate and ticks.
+
+
+### Example intcode programs
 
 Take input, add 3, multiply by 4, output
+	203,1,101,3,1,0,102,4,0,0,4,0,99
 
-203,1,101,3,1,0,102,4,0,0,4,0,99
-
-Set base as 8, Compare input with 'h', if less, jump next instruction and print input, if more, jump next and print 68
-
-109,8,203,-7,7,1,12,2,1005,2,14,104,104,99,204,-7,99
+Set base as 8, Compare input with 'h', if less, jump next instruction and print input, if more, jump next and print 0x68
+	109,8,203,-7,7,1,12,2,1005,2,14,104,104,99,204,-7,99
 
 Set base to 9, check if addr[203]=addr[base-6], if so replace it with 110 and print, if false, print 203
-
-9,0,2008,203,-6,0,1006,0,13,1102,10,11,3,4,3,99
+	9,0,2008,203,-6,0,1006,0,13,1102,10,11,3,4,3,99
